@@ -29,7 +29,7 @@ func TestRot13Reader(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			buf := make([]byte, len(tt.want))
-			if _, err := NewRot13Reader(tt.args.reader).Read(buf); string(buf) != tt.want {
+			if NewRot13Reader(tt.args.reader).Read(buf); string(buf) != tt.want {
 				t.Errorf("Rot13Reader = %q, want %q", string(buf), tt.want)
 			}
 		})

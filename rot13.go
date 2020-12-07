@@ -15,10 +15,8 @@ func NewRot13Reader(reader io.Reader) io.Reader {
 	}
 }
 
-func (r rot13Reader) Read(p []byte) (int, error) {
-	if l, err := r.r.Read(p); err != nil && err != io.EOF {
-		return l, err
-	}
+func (rot rot13Reader) Read(p []byte) (n int, err error) {
+	n, err = rot.r.Read(p)
 	for i, v := range p {
 		switch {
 		case byte('A') <= v && v <= byte('M'):
@@ -31,5 +29,5 @@ func (r rot13Reader) Read(p []byte) (int, error) {
 			p[i] = v - 13
 		}
 	}
-	return len(p), io.EOF
+	return
 }
