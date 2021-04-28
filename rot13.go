@@ -4,18 +4,18 @@ import (
 	"io"
 )
 
-type rot13Reader struct {
+type Rot13Reader struct {
 	r io.Reader
 }
 
-// NewRot13Reader returns an io.Reader that read rot13 characters from r.
-func NewRot13Reader(reader io.Reader) io.Reader {
-	return &rot13Reader{
+// NewRot13Reader returns an Rot13Reader that read rot13 characters from r.
+func NewRot13Reader(reader io.Reader) *Rot13Reader {
+	return &Rot13Reader{
 		r: reader,
 	}
 }
 
-func (rot *rot13Reader) Read(p []byte) (n int, err error) {
+func (rot *Rot13Reader) Read(p []byte) (n int, err error) {
 	n, err = rot.r.Read(p)
 	for i, v := range p {
 		switch {
